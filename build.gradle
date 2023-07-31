@@ -3,6 +3,8 @@
 plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.3'
+    id 'com.coditory.integration-test' version '1.4.5'
+    id 'jacoco'
 }
 
 apply plugin: 'java'
@@ -21,17 +23,30 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    integration_testImplementation.extendsFrom(testImplementation)
+    integration_testRuntimeOnly.extendsFrom(testRuntimeOnly)
+}
+
 dependencies {
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest', version:'1.4.0.RELEASE'
-    compile group: 'org.springframework.data', name: 'spring-data-rest-hal-browser', version:'2.5.2.RELEASE'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version:'1.4.0.RELEASE'
-    compile group: 'com.github.docker-java', name: 'docker-java', version:'3.0.0'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version:'1.4.0.RELEASE'
-    compile group: 'io.prometheus', name: 'simpleclient', version: '0.16.0'
-    compile group: 'io.prometheus', name: 'simpleclient_common', version: '0.16.0'
-    testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'1.4.0.RELEASE') {
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest', version:'1.4.0.RELEASE'
+    implementation group: 'org.springframework.data', name: 'spring-data-rest-hal-browser', version:'2.5.2.RELEASE'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version:'1.4.0.RELEASE'
+    implementation group: 'com.github.docker-java', name: 'docker-java', version:'3.0.0'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version:'1.4.0.RELEASE'
+    implementation group: 'io.prometheus', name: 'simpleclient', version: '0.16.0'
+    implementation group: 'io.prometheus', name: 'simpleclient_common', version: '0.16.0'
+    testImplementation (group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'1.4.0.RELEASE') {
 exclude(module: 'commons-logging')
     }
-    testCompile group: 'com.openpojo', name: 'openpojo', version:'0.8.4'
+    testImplementation group: 'com.openpojo', name: 'openpojo', version:'0.8.4'
+}
+
+jacocoTestReport {
+    executionData(fileTree(project.buildDir).include("jacoco/*.exec"))
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
 }
 

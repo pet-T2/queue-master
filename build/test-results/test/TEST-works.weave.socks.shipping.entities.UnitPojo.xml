@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="works.weave.socks.shipping.entities.UnitPojo" tests="5" skipped="0" failures="0" errors="0" timestamp="2023-07-31T14:14:45" hostname="C14955" time="0.152">
+<testsuite name="works.weave.socks.shipping.entities.UnitPojo" tests="5" skipped="0" failures="0" errors="0" timestamp="2023-07-31T14:20:20" hostname="C14955" time="0.068">
   <properties/>
-  <testcase name="ensureExpectedPojoCount" classname="works.weave.socks.shipping.entities.UnitPojo" time="0.126"/>
-  <testcase name="testPojoStructureAndBehavior" classname="works.weave.socks.shipping.entities.UnitPojo" time="0.018"/>
-  <testcase name="testHashcode" classname="works.weave.socks.shipping.entities.UnitPojo" time="0.002"/>
+  <testcase name="ensureExpectedPojoCount" classname="works.weave.socks.shipping.entities.UnitPojo" time="0.053"/>
+  <testcase name="testPojoStructureAndBehavior" classname="works.weave.socks.shipping.entities.UnitPojo" time="0.012"/>
+  <testcase name="testHashcode" classname="works.weave.socks.shipping.entities.UnitPojo" time="0.001"/>
   <testcase name="testEquals" classname="works.weave.socks.shipping.entities.UnitPojo" time="0.0"/>
   <testcase name="testString" classname="works.weave.socks.shipping.entities.UnitPojo" time="0.001"/>
-  <system-out><![CDATA[2023-07-31 17:14:45.161  INFO 8235 --- [    Test worker] com.openpojo.log.LoggerFactory           : Logging subsystem initialized to [com.openpojo.log.impl.SLF4JLogger]
-2023-07-31 17:14:45.182  INFO 8235 --- [    Test worker] c.o.validation.affirm.Affirmation        : Dynamically setting affirmation implementation = [com.openpojo.validation.affirm.JUnitAssertAffirmation [@3a6d4d1b: ]]
+  <system-out><![CDATA[2023-07-31 17:20:20.080  INFO 8972 --- [    Test worker] com.openpojo.log.LoggerFactory           : Logging subsystem initialized to [com.openpojo.log.impl.SLF4JLogger]
+2023-07-31 17:20:20.082  INFO 8972 --- [    Test worker] o.r.c.s.PojoCoverageFilterServiceFactory : Jacoco detected, auto-configuring OpenPojo to ignore its structures.
+2023-07-31 17:20:20.125  INFO 8972 --- [    Test worker] c.o.validation.affirm.Affirmation        : Dynamically setting affirmation implementation = [com.openpojo.validation.affirm.JUnitAssertAffirmation [@296262dc: ]]
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
