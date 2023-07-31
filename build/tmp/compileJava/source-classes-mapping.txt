@@ -1,0 +1,26 @@
+works/weave/socks/queuemaster/controllers/PrometheusEndpoint.java
+ works.weave.socks.queuemaster.controllers.PrometheusEndpoint
+works/weave/socks/queuemaster/controllers/HealthCheckController.java
+ works.weave.socks.queuemaster.controllers.HealthCheckController
+ works.weave.socks.queuemaster.controllers.HealthCheckController$1
+works/weave/socks/shipping/entities/Shipment.java
+ works.weave.socks.shipping.entities.Shipment
+works/weave/socks/queuemaster/QueueMasterApplication.java
+ works.weave.socks.queuemaster.QueueMasterApplication
+works/weave/socks/queuemaster/configuration/PrometheusEndpointContextConfiguration.java
+ works.weave.socks.queuemaster.configuration.PrometheusEndpointContextConfiguration
+works/weave/socks/queuemaster/monitoring/PrometheusMetricWriter.java
+ works.weave.socks.queuemaster.monitoring.PrometheusMetricWriter
+works/weave/socks/queuemaster/configuration/RabbitMqConfiguration.java
+ works.weave.socks.queuemaster.configuration.RabbitMqConfiguration
+works/weave/socks/queuemaster/DockerSpawner.java
+ works.weave.socks.queuemaster.DockerSpawner
+ works.weave.socks.queuemaster.DockerSpawner$1
+works/weave/socks/queuemaster/entities/HealthCheck.java
+ works.weave.socks.queuemaster.entities.HealthCheck
+works/weave/socks/queuemaster/configuration/ShippingConsumerConfiguration.java
+ works.weave.socks.queuemaster.configuration.ShippingConsumerConfiguration
+works/weave/socks/queuemaster/controllers/PrometheusMvcEndpoint.java
+ works.weave.socks.queuemaster.controllers.PrometheusMvcEndpoint
+works/weave/socks/queuemaster/ShippingTaskHandler.java
+ works.weave.socks.queuemaster.ShippingTaskHandler

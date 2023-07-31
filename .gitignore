@@ -103,8 +103,8 @@ fabric.properties
 # Created by .ignore support plugin (hsz.mobi)
 
 # Gradle builds
-*/bin
-*/target
+*.bin
+*.target
 
 # Load test generates pyc files
 *.pyc
