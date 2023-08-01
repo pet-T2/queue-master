@@ -1,5 +1,3 @@
-
-
 plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.3'
@@ -16,8 +14,6 @@ description = """queue-master"""
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-
-
 
 repositories {
     mavenCentral()
@@ -49,4 +45,3 @@ jacocoTestReport {
         html.enabled = true
     }
 }
-
