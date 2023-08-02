@@ -7,6 +7,8 @@ plugins {
 }
 
 apply plugin: 'java'
+apply plugin: 'jacoco'
+apply plugin: 'coveralls'
 
 group = 'works.weave.microservices-demo'
 version = '1.4.0.RELEASE'
