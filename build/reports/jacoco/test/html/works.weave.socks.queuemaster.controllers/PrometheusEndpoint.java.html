@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PrometheusEndpoint.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">queue-master</a> &gt; <a href="index.source.html" class="el_package">works.weave.socks.queuemaster.controllers</a> &gt; <span class="el_source">PrometheusEndpoint.java</span></div><h1>PrometheusEndpoint.java</h1><pre class="source lang-java linenums">package works.weave.socks.queuemaster.controllers;
+
+import io.prometheus.client.CollectorRegistry;
+import io.prometheus.client.exporter.common.TextFormat;
+import org.springframework.boot.actuate.endpoint.AbstractEndpoint;
+
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
+
+public class PrometheusEndpoint extends AbstractEndpoint&lt;String&gt; {
+
+    private CollectorRegistry registry;
+
+    public PrometheusEndpoint(CollectorRegistry registry) {
+<span class="fc" id="L16">        super(&quot;prometheus&quot;, false, true);</span>
+<span class="fc" id="L17">        this.registry = registry;</span>
+<span class="fc" id="L18">    }</span>
+
+    @Override
+    public String invoke() {
+<span class="nc" id="L22">        Writer writer = new StringWriter();</span>
+        try {
+<span class="nc" id="L24">            TextFormat.write004(writer, registry.metricFamilySamples());</span>
+<span class="nc" id="L25">        } catch (IOException e) {</span>
+<span class="nc" id="L26">            e.printStackTrace();</span>
+<span class="nc" id="L27">        }</span>
+<span class="nc" id="L28">        return writer.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

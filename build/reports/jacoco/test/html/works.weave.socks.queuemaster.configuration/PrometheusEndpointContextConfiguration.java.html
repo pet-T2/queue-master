@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PrometheusEndpointContextConfiguration.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">queue-master</a> &gt; <a href="index.source.html" class="el_package">works.weave.socks.queuemaster.configuration</a> &gt; <span class="el_source">PrometheusEndpointContextConfiguration.java</span></div><h1>PrometheusEndpointContextConfiguration.java</h1><pre class="source lang-java linenums">package works.weave.socks.queuemaster.configuration;
+
+import io.prometheus.client.CollectorRegistry;
+import org.springframework.boot.actuate.autoconfigure.ExportMetricWriter;
+import org.springframework.boot.actuate.autoconfigure.ManagementContextConfiguration;
+import org.springframework.boot.actuate.condition.ConditionalOnEnabledEndpoint;
+import org.springframework.boot.actuate.metrics.writer.MetricWriter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.context.annotation.Bean;
+import works.weave.socks.queuemaster.controllers.PrometheusEndpoint;
+import works.weave.socks.queuemaster.controllers.PrometheusMvcEndpoint;
+import works.weave.socks.queuemaster.monitoring.PrometheusMetricWriter;
+
+@ManagementContextConfiguration
+<span class="fc" id="L15">public class PrometheusEndpointContextConfiguration {</span>
+
+    @Bean
+    public PrometheusEndpoint prometheusEndpoint(CollectorRegistry registry) {
+<span class="fc" id="L19">        return new PrometheusEndpoint(registry);</span>
+    }
+
+    @Bean
+    @ConditionalOnBean(PrometheusEndpoint.class)
+    @ConditionalOnEnabledEndpoint(&quot;prometheus&quot;)
+    PrometheusMvcEndpoint prometheusMvcEndpoint(PrometheusEndpoint prometheusEndpoint) {
+<span class="fc" id="L26">        return new PrometheusMvcEndpoint(prometheusEndpoint);</span>
+    }
+
+    @Bean
+    CollectorRegistry collectorRegistry() {
+<span class="fc" id="L31">        return new CollectorRegistry();</span>
+    }
+
+    @Bean
+    @ExportMetricWriter
+    MetricWriter prometheusMetricWriter(CollectorRegistry registry) {
+<span class="fc" id="L37">        return new PrometheusMetricWriter(registry);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

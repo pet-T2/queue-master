@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HealthCheckController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">queue-master</a> &gt; <a href="index.source.html" class="el_package">works.weave.socks.queuemaster.controllers</a> &gt; <span class="el_source">HealthCheckController.java</span></div><h1>HealthCheckController.java</h1><pre class="source lang-java linenums">package works.weave.socks.queuemaster.controllers;
+
+import com.rabbitmq.client.Channel;
+import org.springframework.amqp.AmqpException;
+import org.springframework.amqp.rabbit.core.ChannelCallback;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import works.weave.socks.queuemaster.entities.HealthCheck;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@RestController
+<span class="fc" id="L21">public class HealthCheckController {</span>
+
+    @Autowired
+    RabbitTemplate rabbitTemplate;
+
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(method = RequestMethod.GET, path = &quot;/health&quot;)
+    public
+    @ResponseBody
+    Map&lt;String, List&lt;HealthCheck&gt;&gt; getHealth() {
+<span class="fc" id="L31">        Map&lt;String, List&lt;HealthCheck&gt;&gt; map = new HashMap&lt;String, List&lt;HealthCheck&gt;&gt;();</span>
+<span class="fc" id="L32">        List&lt;HealthCheck&gt; healthChecks = new ArrayList&lt;HealthCheck&gt;();</span>
+<span class="fc" id="L33">        Date dateNow = Calendar.getInstance().getTime();</span>
+
+<span class="fc" id="L35">        HealthCheck app = new HealthCheck(&quot;queue-master&quot;, &quot;OK&quot;, dateNow);</span>
+<span class="fc" id="L36">        HealthCheck rabbitmq = new HealthCheck(&quot;queue-master-rabbitmq&quot;, &quot;OK&quot;, dateNow);</span>
+
+        try {
+<span class="pc" id="L39">            this.rabbitTemplate.execute(new ChannelCallback&lt;String&gt;() {</span>
+                @Override
+                public String doInRabbit(Channel channel) throws Exception {
+<span class="nc" id="L42">                    Map&lt;String, Object&gt; serverProperties = channel.getConnection().getServerProperties();</span>
+<span class="nc" id="L43">                    return serverProperties.get(&quot;version&quot;).toString();</span>
+                }
+            });
+<span class="fc" id="L46">        } catch ( AmqpException e ) {</span>
+<span class="fc" id="L47">            rabbitmq.setStatus(&quot;err&quot;);</span>
+<span class="nc" id="L48">        }</span>
+
+<span class="fc" id="L50">        healthChecks.add(app);</span>
+<span class="fc" id="L51">        healthChecks.add(rabbitmq);</span>
+
+<span class="fc" id="L53">        map.put(&quot;health&quot;, healthChecks);</span>
+<span class="fc" id="L54">        return map;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
