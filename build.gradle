@@ -27,6 +27,21 @@ configurations {
     integration_testRuntimeOnly.extendsFrom(testRuntimeOnly)
 }
 
+sourceSets {
+    integration {
+        java {
+            srcDir 'src/test/java'
+            exclude '**/Unit*.java'
+        }
+    }
+    test {
+        java {
+            srcDir 'src/test/java'
+            exclude '**/IT*.java'
+        }
+    }
+}
+
 dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest', version:'1.4.0.RELEASE'
     implementation group: 'org.springframework.data', name: 'spring-data-rest-hal-browser', version:'2.5.2.RELEASE'

@@ -1,4 +1,0 @@
-works/weave/socks/shipping/entities/UnitPojo.java
- works.weave.socks.shipping.entities.UnitPojo
-works/weave/socks/queuemaster/controllers/ITHealthCheckController.java
- works.weave.socks.queuemaster.controllers.ITHealthCheckController

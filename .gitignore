@@ -105,6 +105,7 @@ fabric.properties
 # Gradle builds
 *.bin
 *.target
+*.build
 
 # Load test generates pyc files
 *.pyc

@@ -48,10 +48,7 @@ jobs:
       env:
         COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: ./gradlew -DrepoToken=${GITHUB_TOKEN} -DserviceJobId=${GITHUB_RUN_ID} -Dbranch=${GITHUB_REF} -DpullRequest=${GITHUB_HEAD_REF} -DserviceName=GITHUB jacocoTestReport coveralls
-      #run: ./gradlew -DrepoToken=${GITHUB_TOKEN} -DserviceJobId=${GITHUB_RUN_ID} -Dbranch=${GITHUB_REF} -DpullRequest=${GITHUB_HEAD_REF} -DserviceName=GITHUB verify jacoco:report coveralls:report
-
-    #
-    #
+      
     # Push to dockerhub
     - name: Push to Docker Hub
       uses: docker/build-push-action@v1
