@@ -45,8 +45,8 @@ jobs:
     #
     # Upload coverage results to coveralls
     - name: Submit Coveralls
-      env:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+      #env:
+      #  github-token: ${{ secrets.GITHUB_TOKEN }}
       run: ./gradlew -DrepoToken=${GITHUB_TOKEN} -DserviceJobId=${GITHUB_RUN_ID} -Dbranch=${GITHUB_REF} -DpullRequest=${GITHUB_HEAD_REF} -DserviceName=GITHUB jacocoTestReport coveralls
       #run: ./gradlew -DrepoToken=${GITHUB_TOKEN} -DserviceJobId=${GITHUB_RUN_ID} -Dbranch=${GITHUB_REF} -DpullRequest=${GITHUB_HEAD_REF} -DserviceName=GITHUB verify jacoco:report coveralls:report
 
