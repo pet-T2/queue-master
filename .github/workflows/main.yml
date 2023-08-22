@@ -68,8 +68,8 @@ jobs:
 
     - name: configure podman client
       run: |-
-      gcloud auth print-access-token | podman login -u oauth2accesstoken --password-stdin europe-central2-docker.pkg.dev
-      podman info
+        gcloud auth print-access-token | podman login -u oauth2accesstoken --password-stdin europe-central2-docker.pkg.dev
+        podman info
 
     #- name: Push to Google Artifact Registry        
     #  uses: webgtx/gcr-podman-action@v2.1  
