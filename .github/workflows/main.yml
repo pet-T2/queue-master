@@ -50,7 +50,7 @@ jobs:
       run: ./gradlew -DrepoToken=${GITHUB_TOKEN} -DserviceJobId=${GITHUB_RUN_ID} -Dbranch=${GITHUB_REF} -DpullRequest=${GITHUB_HEAD_REF} -DserviceName=GITHUB jacocoTestReport coveralls
       
     # Push to Google Artifact Registry
-    - name: Push to Google Artifact Registry
+    - name: setup gcloud
       env:
         IMAGE_NAME: queue-master
         PROJECT_ID: gd-gcp-gridu-devops-t1-t2
@@ -60,10 +60,14 @@ jobs:
         project_id: ${{ env.PROJECT_ID }}
         export_default_credentials: true
 
-    - uses: webgtx/gcr-podman-action@v2
+    - name: configure podman client
+      run: gcloud auth print-access-token | podman login -u oauth2accesstoken --password-stdin https://europe-central2-docker.pkg.dev
+
+    - name: Push to Google Artifact Registry
       env:
         IMAGE_NAME: queue-master
         PROJECT_ID: gd-gcp-gridu-devops-t1-t2
+      uses: webgtx/gcr-podman-action@v2  
       with:
         project_id: ${{ env.PROJECT_ID }}
         image_id: ${{ env.IMAGE_NAME }}:latest
