@@ -60,6 +60,7 @@ jobs:
         project_id: ${{ env.PROJECT_ID }}
         export_default_credentials: true
 
+    - name: build podman image
       uses: redhat-actions/podman-login@v1
       if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/dev'
       with:
