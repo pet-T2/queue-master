@@ -19,6 +19,8 @@ jobs:
       GROUP: weaveworksdemos 
       COMMIT: ${{ github.sha }}
       REPO: queue-master
+      IMAGE_NAME: queue-master
+      PROJECT_ID: gd-gcp-gridu-devops-t1-t2
     steps:
     - uses: actions/checkout@v3
       with:
@@ -67,11 +69,8 @@ jobs:
     - name: configure podman client
       run: gcloud auth print-access-token | podman login -u oauth2accesstoken --password-stdin europe-central2-docker.pkg.dev
 
-    - name: Push to Google Artifact Registry
-      env:
-        IMAGE_NAME: queue-master
-        PROJECT_ID: gd-gcp-gridu-devops-t1-t2
-      uses: webgtx/gcr-podman-action@v2  
+    - name: Push to Google Artifact Registry        
+      uses: webgtx/gcr-podman-action@v2.1  
       with:
         project_id: ${{ env.PROJECT_ID }}
         image_id: ${{ env.IMAGE_NAME }}:latest
