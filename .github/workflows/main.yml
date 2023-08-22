@@ -60,13 +60,15 @@ jobs:
         project_id: ${{ env.PROJECT_ID }}
         export_default_credentials: true
 
-    - name: build podman image
-      uses: redhat-actions/podman-login@v1
-      if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/dev'
+    - uses: webgtx/gcr-podman-action@v2
+      env:
+        IMAGE_NAME: queue-master
+        PROJECT_ID: gd-gcp-gridu-devops-t1-t2
       with:
-        run: |-
-          gcloud auth print-access-token | podman login -u oauth2accesstoken --password-stdin https://europe-central2-docker.pkg.dev
-          podman build . -t test_q-m:v2
-          podman push europe-central2-docker.pkg.dev/$PROJECT_ID/kkanafotskyi/test_q-m:v2
+        project_id: ${{ env.PROJECT_ID }}
+        image_id: ${{ env.IMAGE_NAME }}:latest
+        host: europe-central2-docker.pkg.dev/kkanafotskyi
+        auth_type: oauth2
+        access_token: ${{ secrets.SERVICE_ACCOUNT_KEY }}
 
         
