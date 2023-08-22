@@ -50,6 +50,10 @@ jobs:
       run: ./gradlew -DrepoToken=${GITHUB_TOKEN} -DserviceJobId=${GITHUB_RUN_ID} -Dbranch=${GITHUB_REF} -DpullRequest=${GITHUB_HEAD_REF} -DserviceName=GITHUB jacocoTestReport coveralls
       
     # Push to Google Artifact Registry
+    - name: auth 
+      uses: 'google-github-actions/auth@v1'
+      with:
+        credentials_json: ${{ secrets.SERVICE_ACCOUNT_KEY }} 
     - name: setup gcloud
       env:
         IMAGE_NAME: queue-master
