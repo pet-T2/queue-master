@@ -49,15 +49,23 @@ jobs:
         COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: ./gradlew -DrepoToken=${GITHUB_TOKEN} -DserviceJobId=${GITHUB_RUN_ID} -Dbranch=${GITHUB_REF} -DpullRequest=${GITHUB_HEAD_REF} -DserviceName=GITHUB jacocoTestReport coveralls
       
-    # Push to dockerhub
-    - name: Push to Docker Hub
-      uses: docker/build-push-action@v1
-      if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/master'
+    # Push to Google Artifact Registry
+    - name: Push to Google Artifact Registry
+      env:
+        IMAGE_NAME: queue-master
+        PROJECT_ID: gd-gcp-gridu-devops-t1-t2
+      uses: google-github-actions/setup-gcloud@master
       with:
-        username: ${{ secrets.DOCKER_USER }}
-        password: ${{ secrets.DOCKER_PASS }}
-        repository: ${{ env.GROUP }}/${{ env.REPO }}
-        tag_with_ref: true
-        tag_with_sha: true
-        path: docker/queue-master
-        dockerfile: docker/queue-master/Dockerfile
+        service_account_key: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+        project_id: ${{ env.PROJECT_ID }}
+        export_default_credentials: true
+
+      uses: redhat-actions/podman-login@v1
+      if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/dev'
+      with:
+        run: |-
+          gcloud auth print-access-token | podman login -u oauth2accesstoken --password-stdin https://europe-central2-docker.pkg.dev
+          podman build . -t test_q-m:v2
+          podman push europe-central2-docker.pkg.dev/$PROJECT_ID/kkanafotskyi/test_q-m:v1
+
+        
