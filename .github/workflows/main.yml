@@ -72,7 +72,7 @@ jobs:
         podman info
     - name: build & push podnan image    
       run: |-
-        podman build . -f ./podmanfile -t europe-central2-docker.pkg.dev/gd-gcp-gridu-devops-t1-t2/kkanafotskyi/test_q-m:v2
+        podman build . -t europe-central2-docker.pkg.dev/gd-gcp-gridu-devops-t1-t2/kkanafotskyi/test_q-m:v2
         podman push europe-central2-docker.pkg.dev/gd-gcp-gridu-devops-t1-t2/kkanafotskyi/test_q-m:v2
     #- name: Push to Google Artifact Registry        
     #  uses: webgtx/gcr-podman-action@v2.1  
