@@ -33,7 +33,10 @@ jobs:
 
     # Build
     - name: Build jar files
-      run: ./gradlew build --build-cache -x test -x integrationTest
+      run: |-
+        ./gradlew build --build-cache -x test -x integrationTest
+        ls-la
+        ls -la ./target
 
     # Unit test
     - name: Run unit tests
