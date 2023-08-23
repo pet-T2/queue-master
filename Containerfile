@@ -14,7 +14,7 @@ RUN	addgroup -g ${SERVICE_GID} ${SERVICE_GROUP} && \
 	setcap 'cap_net_bind_service=+ep' $(readlink -f $(which java))
 
 WORKDIR /usr/src/app
-COPY ./target/*.jar ./app.jar
+COPY *.jar ./app.jar
 
 RUN	chown -R ${SERVICE_USER}:${SERVICE_GROUP} ./app.jar
 
