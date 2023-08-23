@@ -36,7 +36,7 @@ jobs:
       run: |-
         ./gradlew build --build-cache -x test -x integrationTest
         ls -la
-        ls -la ./target
+        ls -la ./build/lib
 
     # Unit test
     - name: Run unit tests
