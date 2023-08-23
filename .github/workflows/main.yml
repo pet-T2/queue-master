@@ -72,6 +72,7 @@ jobs:
     - name: configure podman client
       run: |-
         gcloud auth print-access-token | podman login -u oauth2accesstoken --password-stdin europe-central2-docker.pkg.dev
+        gcloud config set account kkanafotskyi@griddynamics.com --quiet
         gcloud info
         podman info
     - name: build & push podnan image    
