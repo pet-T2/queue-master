@@ -72,18 +72,9 @@ jobs:
     - name: configure podman client
       run: |-
         gcloud auth print-access-token | podman login -u oauth2accesstoken --password-stdin europe-central2-docker.pkg.dev
+        gcloud info
         podman info
     - name: build & push podnan image    
       run: |-
         podman build . -t europe-central2-docker.pkg.dev/gd-gcp-gridu-devops-t1-t2/kkanafotskyi/test_q-m:v2
-        podman push europe-central2-docker.pkg.dev/gd-gcp-gridu-devops-t1-t2/kkanafotskyi/test_q-m:v2
-    #- name: Push to Google Artifact Registry        
-    #  uses: webgtx/gcr-podman-action@v2.1  
-    #  with:
-    #    project_id: ${{ env.PROJECT_ID }}
-    #    image_id: ${{ env.IMAGE_NAME }}:latest
-    #    host: europe-central2-docker.pkg.dev/kkanafotskyi
-    #   auth_type: oauth2
-    #    access_token: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-
-        
+        podman push europe-central2-docker.pkg.dev/gd-gcp-gridu-devops-t1-t2/kkanafotskyi/test_q-m:v2  

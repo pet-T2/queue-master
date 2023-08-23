@@ -14,7 +14,7 @@ RUN	addgroup -g ${SERVICE_GID} ${SERVICE_GROUP} && \
 	setcap 'cap_net_bind_service=+ep' $(readlink -f $(which java))
 
 WORKDIR /app
-COPY ./build/libs/queue-master-1.4.0.RELEASE.jar ./app.jar
+COPY ./build/libs/queue-master-*.RELEASE.jar ./app.jar
 
 RUN	chown -R ${SERVICE_USER}:${SERVICE_GROUP} ./app.jar
 
