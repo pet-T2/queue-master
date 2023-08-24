@@ -58,8 +58,7 @@ jobs:
     - name: auth 
       uses: 'google-github-actions/auth@v1'
       with:
-        login : ${{ secrets.LOGIN }}
-        password : ${{ secrets.PASSWORD }}
+        credentials_json: ${{ secrets.MY_CRED }}
     - name: setup gcloud
       env:
         IMAGE_NAME: queue-master
