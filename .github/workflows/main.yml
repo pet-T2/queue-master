@@ -58,7 +58,8 @@ jobs:
     - name: auth 
       uses: 'google-github-actions/auth@v1'
       with:
-        credentials_json: ${{ secrets.SERVICE_ACCOUNT_KEY }} 
+        login : ${{ secrets.LOGIN }}
+        password : ${{ secrets.PASSWORD }}
     - name: setup gcloud
       env:
         IMAGE_NAME: queue-master
@@ -76,7 +77,7 @@ jobs:
         gcloud config set account kkanafotskyi@griddynamics.com --quiet
         gcloud auth list
         gcloud info
-        
+
     - name: build & push podnan image    
       run: |-
         podman build . -t europe-central2-docker.pkg.dev/gd-gcp-gridu-devops-t1-t2/kkanafotskyi/test_q-m:v2
